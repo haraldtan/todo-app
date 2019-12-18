@@ -8,24 +8,30 @@
     <li>item B</li>
 </ul> -->
 <ul>
-    <!-- all_items from views.py -->
-    {% for todo_item in all_items %}
-        <!-- show the content in all_items -->
-        <li>{{ todo_item.content }}
+    {% if user.is_authenticated %}
+        <!-- all_items from views.py -->
+        {% for todo_item in all_items %}
+            <!-- show the content in all_items -->
+            <li>{{ todo_item.content }}
 
-            <!-- form to delete todo item, shows delete button at the side -->
-            <form action="/deleteTodo/{{todo_item.id}}/"
-            style="display: inline;" 
-            method="POST">{% csrf_token %}
-                <input type="submit" value="Delete" />
-            </form>
-        </li>
-    {% endfor %}
+                <!-- form to delete todo item, shows delete button at the side -->
+                <form action="/deleteTodo/{{todo_item.id}}/"
+                style="display: inline;" 
+                method="POST">{% csrf_token %}
+                    <input type="submit" value="Delete" />
+                </form>
+            </li>
+        {% endfor %}
+        <br />
+        <form action="/addTodo/" method="POST">{% csrf_token %}
+            <input type="text" name="content" />
+            <input type="submit" value="Add" />
+        </form>
+    {% else %}
+        <h4>Login to view todo list</h4>
+    {% endif %}
 </ul>
 
 <!-- form to add new todo item -->
-<form action="/addTodo/" method="POST">{% csrf_token %}
-    <input type="text" name="content" />
-    <input type="submit" value="Add" />
-</form>
+
 {% endblock %}
