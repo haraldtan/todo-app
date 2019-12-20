@@ -8,6 +8,12 @@ def todo(request):
     return render(request, "todo.html",
     {'all_items': all_todo_items})
 
+def history(request):
+    return render(request, "history.html")
+
+def contributions(request):
+    return render(request, "contributions.html")
+
 def addTodo(request):
     new_item = TodoItem(content = request.POST['content'])
     new_item.save()

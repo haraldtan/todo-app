@@ -15,15 +15,20 @@
             <li>{{ todo_item.content }}
 
                 <!-- form to delete todo item, shows delete button at the side -->
-                <form action="/deleteTodo/{{todo_item.id}}/"
+                <form action="deleteTodo/{{todo_item.id}}/"
                 style="display: inline;" 
                 method="POST">{% csrf_token %}
                     <input type="submit" value="Delete" />
                 </form>
+                <form action="archiveTodo/{{todo_item.id}}/"
+                style="display: inline;" 
+                method="POST">{% csrf_token %}
+                    <input type="submit" value="Archive" />
+                </form>
             </li>
         {% endfor %}
         <br />
-        <form action="/addTodo/" method="POST">{% csrf_token %}
+        <form action="addTodo/" method="POST">{% csrf_token %}
             <input type="text" name="content" />
             <input type="submit" value="Add" />
         </form>
