@@ -3,4 +3,16 @@
 {% block page_content %}
 <h1>This is the History Page.</h1>
 
+<ul>
+    {% if user.is_authenticated %}
+        <!-- all_items from views.py -->
+        {% for archived_item in all_archived_items %}
+            <!-- show the content in all_items -->
+            <li>{{ archived_item.content }}
+            </li>
+        {% endfor %}
+    {% else %}
+        <h4>Login to view history</h4>
+    {% endif %}
+</ul>
 {% endblock %}
