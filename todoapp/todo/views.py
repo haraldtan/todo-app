@@ -28,6 +28,7 @@ def deleteTodo(request, todo_id):
 
 def archiveTodo(request, todo_id):
     item_to_archive = TodoItem.objects.get(id=todo_id)
-    new_archive_item = ArchivedItem(content = item_to_archive)
+    new_archive_item = ArchivedItem(content = item_to_archive.content)
     new_archive_item.save()
+    item_to_archive.delete()
     return HttpResponseRedirect('/todo/')
