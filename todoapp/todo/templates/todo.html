@@ -13,27 +13,27 @@
         {% for todo_item in all_items %}
             <!-- show the content in all_items -->
             <li>{{ todo_item.content }}
-
+                
                 <!-- form to delete todo item, shows delete button at the side -->
                 <form action="deleteTodo/{{todo_item.id}}/"
                 style="display: inline;" 
                 method="POST">{% csrf_token %}
-                    <input type="submit" value="Delete" />
+                    <input type="submit" value="Delete" name="Delete" />
                 </form>
                 <form action="archiveTodo/{{todo_item.id}}/"
                 style="display: inline;" 
                 method="POST">{% csrf_token %}
-                    <input type="submit" value="Archive" />
+                    <input type="submit" value="Archive" name="Archive" />
                 </form>
             </li>
         {% endfor %}
         <br />
         <form action="addTodo/" method="POST">{% csrf_token %}
-            <input type="text" name="content" />
-            <input type="submit" value="Add" />
+            <input type="text" name="content" required/>
+            <input type="submit" value="Add" name="Add" />
         </form>
     {% else %}
-        <h4>Login to view todo list</h4>
+        <h4>Login to view To-Do list</h4>
     {% endif %}
 </ul>
 
