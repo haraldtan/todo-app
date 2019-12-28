@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<h1>This is the Todolist Page.</h1>
+<center><h1>To-Do Page</h1></center>
+<h1>{{request.user.username}}</h1>
+&nbsp; 
 
 <!-- <ul>
     <li>item A</li>
@@ -12,18 +14,13 @@
         <!-- all_items from views.py -->
         {% for todo_item in all_items %}
             <!-- show the content in all_items -->
-            <li>{{ todo_item.content }}
+            <li>{{ todo_item.content }}    ({{todo_item.time}})  {{todo_item.username}}
                 
                 <!-- form to delete todo item, shows delete button at the side -->
-                <form action="deleteTodo/{{todo_item.id}}/"
-                style="display: inline;" 
-                method="POST">{% csrf_token %}
-                    <input type="submit" value="Delete" name="Delete" />
-                </form>
                 <form action="archiveTodo/{{todo_item.id}}/"
                 style="display: inline;" 
                 method="POST">{% csrf_token %}
-                    <input type="submit" value="Archive" name="Archive" />
+                    <input type="submit" value="Delete" name="Delete" />
                 </form>
             </li>
         {% endfor %}

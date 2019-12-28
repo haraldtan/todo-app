@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<h1>This is the History Page.</h1>
-
+<center><h1>To-Do History </h1></center>
+&nbsp;
+<h1>{{user.username.title}}</h1>
 <ul>
     {% if user.is_authenticated %}
         <!-- all_items from views.py -->
         {% for archived_item in all_archived_items %}
             <!-- show the content in all_items -->
-            <li>{{ archived_item.content }}
+            <li>{{archived_item.content}}, {{archived_item.info}} {{archived_item.time}}
             </li>
         {% endfor %}
     {% else %}
-        <h4>Login to view history</h4>
+        <h4>Login to view History</h4>
     {% endif %}
 </ul>
 {% endblock %}
