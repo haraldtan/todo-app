@@ -13,8 +13,9 @@
     {% if user.is_authenticated %}
         <!-- all_items from views.py -->
         {% for todo_item in all_items %}
+            {% if todo_item.username == request.user.username %}
             <!-- show the content in all_items -->
-            <li>{{ todo_item.content }}    ({{todo_item.time}})  {{todo_item.username}}
+            <li>{{ todo_item.content }}    ({{todo_item.time}})  
                 
                 <!-- form to delete todo item, shows delete button at the side -->
                 <form action="archiveTodo/{{todo_item.id}}/"
@@ -23,6 +24,7 @@
                     <input type="submit" value="Delete" name="Delete" />
                 </form>
             </li>
+            {%endif%}
         {% endfor %}
         <br />
         <form action="addTodo/" method="POST">{% csrf_token %}

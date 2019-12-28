@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import TodoItem, ArchivedItem
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -18,8 +19,8 @@ def contributions(request):
     return render(request, "contributions.html")
 
 def addTodo(request):
-    new_item = TodoItem(content = request.POST['content'])
-    new_archive_item = ArchivedItem(content = new_item.content , time = new_item.time, info = "Added on") 
+    new_item = TodoItem(content = request.POST['content'],username =request.user)
+    new_archive_item = ArchivedItem(content = new_item.content , time = new_item.time, info = "Added on", username = request.user) 
     new_item.save()
     new_archive_item.save()
     return HttpResponseRedirect('/todo/')

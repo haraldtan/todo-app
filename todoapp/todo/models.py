@@ -6,10 +6,12 @@ class TodoItem(models.Model):
     content = models.TextField()
     time = models.DateTimeField(auto_now=True)
     info = models.CharField(max_length=50, default='')
+    username =  models.CharField(max_length=50, default='')
    
 
 class ArchivedItem(models.Model):
     content = models.TextField()
     time = models.DateTimeField(auto_now=True)
     info = models.CharField(max_length=50, default='' )
+    username =  models.CharField(max_length=50, default='')
    
