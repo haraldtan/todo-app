@@ -3,13 +3,12 @@
 {% block page_content %}
 <center><h1>To-Do History </h1></center>
 &nbsp;
-<h1>{{user.username.title}}</h1>
 <ul>
     {% if user.is_authenticated %}
         <!-- all_items from views.py -->
         {% for archived_item in all_archived_items %}
             <!-- show the content in all_items -->
-            <li>{{archived_item.content}}, {{archived_item.info}} {{archived_item.time}} {{archived_item.username}}
+            <li>{{archived_item.content}}, {{archived_item.info}} {{archived_item.time}} by {{archived_item.username}}
             </li>
         {% endfor %}
     {% else %}

@@ -18,16 +18,31 @@ def test_ExistingUser():
     time.sleep(0.5)
     assert driver.find_element_by_xpath("//*[contains(text(), 'A user with that username already exists.')]")
 
+def test_username_morethan150Char():
+    driver = webdriver.Firefox()
+    driver.get('http://127.0.0.1:8000/accounts/register/')
+    driver.find_element_by_name("username").send_keys("Team5isatngeeannpolytechnic9876543210001uyhtgfdcxvbnmefdsrht56rt24ghrwgh8wgh5thj5t8j589hathpe57hwor9aoghbvr89wthfeviFn4w085735trg4hqgnRWUgfgf7efehf8ehf54321")
+    driver.find_element_by_name("password1").send_keys("Pass123word")
+    driver.find_element_by_name("password2").send_keys("Pass123word")
+    submit = driver.find_element_by_name("submit")
+    submit.click()
+    time.sleep(0.5)
+    assert driver.find_element_by_xpath("//*[contains(text(), 'Username should contain 150 or less characters including the use of letters, digits and characters such as @.+-_')]")
+
 def test_Valid_150_Charcaters():
     driver = webdriver.Firefox()
     driver.get('http://127.0.0.1:8000/accounts/register/')
     driver.find_element_by_name("username").send_keys("Team5isatngeeannpolytechnic123456789008uyhtgfdcxvbnmefdsrht56rt24ghrwgh8wgh5thj5t8j589hathpe57hwor9aoghbvr89wthfeviFn4w085735trg4hqgnRWUgfgf7efehf8ehf")
     driver.find_element_by_name("password1").send_keys("Pass123word")
     driver.find_element_by_name("password2").send_keys("Pass123word")
-    submit = driver.find_element_by_name("submit")
-    submit.click()
+    submit1 = driver.find_element_by_name("submit")
+    submit1.click()
     time.sleep(0.5)
-    assert driver.current_url == 'http://127.0.0.1:8000/accounts/login/'
+    driver.find_element_by_name("username").send_keys("Team5isatngeeannpolytechnic123456789008uyhtgfdcxvbnmefdsrht56rt24ghrwgh8wgh5thj5t8j589hathpe57hwor9aoghbvr89wthfeviFn4w085735trg4hqgnRWUgfgf7efehf8ehf")
+    driver.find_element_by_name("password").send_keys("Pass123word")
+    submit2 = driver.find_element_by_name("submit")
+    submit2.click()
+    assert driver.find_element_by_xpath("//*[contains(text(), 'Team5isatngeeannpolytechnic123456789008uyhtgfdcxvbnmefdsrht56rt24ghrwgh8wgh5thj5t8j589hathpe57hwor9aoghbvr89wthfeviFn4w085735trg4hqgnRWUgfgf7efehf8ehf')]")
 
 def test_password_lessthan8Char():
     driver = webdriver.Firefox()
@@ -107,7 +122,11 @@ def test_ValidSignup():
     driver.find_element_by_name("username").send_keys("team52")
     driver.find_element_by_name("password1").send_keys("Pass123word")
     driver.find_element_by_name("password2").send_keys("Pass123word")
-    submit = driver.find_element_by_name("submit")
-    submit.click()
+    submit1 = driver.find_element_by_name("submit")
+    submit1.click()
     time.sleep(0.5)
-    assert driver.current_url == 'http://127.0.0.1:8000/accounts/login/'
+    driver.find_element_by_name("username").send_keys("team52")
+    driver.find_element_by_name("password").send_keys("Pass123word")
+    submit2 = driver.find_element_by_name("submit")
+    submit2.click()
+    assert driver.find_element_by_xpath("//*[contains(text(), 'team52')]")

@@ -28,14 +28,14 @@ def addTodo(request):
 
 def deleteTodo(request, todo_id):
     item_to_delete = TodoItem.objects.get(id=todo_id)
+    new_archive_item = ArchivedItem(content = item_to_delete.content , time = item_to_delete.time, info = "Deleted on", username = request.user)
+    new_archive_item.save()
     item_to_delete.delete()
-    new_archive_item = ArchivedItem(content = new_item.content , time = new_item.time) 
-    new_item.save()
     return HttpResponseRedirect('/todo/')
 
 def archiveTodo(request, todo_id):
     item_to_archive = TodoItem.objects.get(id=todo_id)
-    new_archive_item = ArchivedItem(content = item_to_archive.content , time = item_to_archive.time, info = "Deleted on")
+    new_archive_item = ArchivedItem(content = item_to_archive.content , time = item_to_archive.time, info = "Archived on", username = request.user)
     new_archive_item.save()
     item_to_archive.delete()
     return HttpResponseRedirect('/todo/')

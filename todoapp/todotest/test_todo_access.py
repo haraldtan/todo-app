@@ -11,7 +11,6 @@ def test_noLogin_todo():
     driver = webdriver.Firefox()
     driver.get("http://127.0.0.1:8000/todo/")
     assert driver.find_element_by_xpath("//*[contains(text(), 'Login to view To-Do list')]")
-    driver.close()
 
 def test_login_todo():
     driver = webdriver.Firefox()
@@ -23,5 +22,5 @@ def test_login_todo():
     submit = driver.find_element_by_name("submit")
     submit.click()
     time.sleep(0.5)
-    assert driver.find_element_by_name("Delete") and driver.find_element_by_name("Add") and driver.find_element_by_name("Archive")
+    assert driver.find_element_by_name("content") and driver.find_element_by_name("Add")
     

@@ -18,10 +18,15 @@
             <li>{{ todo_item.content }}    ({{todo_item.time}})  
                 
                 <!-- form to delete todo item, shows delete button at the side -->
-                <form action="archiveTodo/{{todo_item.id}}/"
+                <form action="deleteTodo/{{todo_item.id}}/"
                 style="display: inline;" 
                 method="POST">{% csrf_token %}
                     <input type="submit" value="Delete" name="Delete" />
+                </form>
+                <form action="archiveTodo/{{todo_item.id}}/"
+                style="display: inline;" 
+                method="POST">{% csrf_token %}
+                    <input type="submit" value="Archive" name="Archive" />
                 </form>
             </li>
             {%endif%}
